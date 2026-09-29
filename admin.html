@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de Novios</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="barra">
+    <a href="invitacion.html">Ver invitación</a>
+    <button type="button" onclick="cerrarSesion()">Salir</button>
+  </div>
+
+  <main class="contenedor admin">
+    <h1 class="script centro" style="font-size:3rem;color:var(--dorado)"><span data-boda="novio"></span> &amp; <span data-boda="novia"></span></h1>
+    <p class="centro suave">Panel de confirmaciones</p>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="filtros">
+      <input type="search" id="buscar" placeholder="Buscar familia o asistente…">
+      <select id="filtro">
+        <option value="todos">Todas</option>
+        <option value="si">Asisten</option>
+        <option value="no">No asisten</option>
+        <option value="pend">Pendientes</option>
+      </select>
+      <button class="boton pequeno" type="button" id="btn-csv">Exportar CSV</button>
+    </div>
+
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Familia</th><th>Usuario</th><th>Estado</th><th>Cupos</th><th>Asisten</th>
+            <th>Nombres</th><th>Restricciones</th><th>Mensaje</th><th>Actualizado</th>
+          </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+      </table>
+    </div>
+    <p id="error" class="mensaje error"></p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
