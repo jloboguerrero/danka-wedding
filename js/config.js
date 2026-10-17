@@ -22,10 +22,40 @@ const DATOS_BODA = {
     hora: "7:00 p. m.",
     mapa: "https://maps.google.com/?q=Quisquella+Barranquilla",
   },
-  // Fotos: reemplaza los archivos de la carpeta img/ (o cambia el nombre aquí, ej. "img/portada.jpg")
   fotos: {
-    portada: "img/portada.svg",
-    galeria: ["img/galeria-1.svg", "img/galeria-2.svg", "img/galeria-3.svg", "img/galeria-4.svg"],
+    portada: "img/fotos/foto03.jpeg",
+    parallax: "img/fotos/foto05.jpeg",
+    parallax2: "img/fotos/foto01.jpeg",
+    galeria: [
+      "img/fotos/foto01.jpeg",
+      "img/fotos/foto02.jpeg",
+      "img/fotos/foto03.jpeg",
+      "img/fotos/foto04.jpeg",
+      "img/fotos/foto05.jpeg",
+      "img/fotos/foto06.jpeg",
+      "img/fotos/foto07.jpeg",
+    ],
+  },
+  historia: {
+    titulo: "Nuestra Historia",
+    subtitulo: "Un amor que nació para quedarse",
+    momentos: [
+      {
+        titulo: "El comienzo",
+        texto: "Desde el primer momento en que nuestras miradas se cruzaron, supimos que algo especial estaba por comenzar. Lo que empezó como una amistad se fue convirtiendo en el amor más bonito de nuestras vidas.",
+        foto: "img/fotos/foto07.jpeg",
+      },
+      {
+        titulo: "Creciendo juntos",
+        texto: "Cada día juntos ha sido una aventura. Entre risas, viajes y sueños compartidos, fuimos construyendo los cimientos de lo que hoy es nuestro hogar. Aprendimos a ser equipo, a apoyarnos y a elegernos cada día.",
+        foto: "img/fotos/foto04.jpeg",
+      },
+      {
+        titulo: "El gran paso",
+        texto: "Y llegó el momento de dar el siguiente paso. Con el corazón lleno de amor y certeza, decidimos unir nuestras vidas para siempre. Ahora queremos celebrarlo con las personas que más amamos: ustedes.",
+        foto: "img/fotos/foto06.jpeg",
+      },
+    ],
   },
   dressCode: "Formal elegante",
   dressCodeNota: "Reservamos el color blanco para la novia.",

@@ -22,11 +22,20 @@
     <div class="fecha" data-boda="fechaTexto"></div>
     <div class="cupos" id="cupos"></div>
     <div class="cuenta" id="cuenta"></div>
-    <img class="foto-portada" id="foto-portada" alt="Johan y Dankaly">
   </header>
 
-  <main class="contenedor">
-    <section class="bloque centro">
+  <div class="parallax" id="parallax1"></div>
+
+  <main>
+    <section class="bloque-historia fade-in" id="historia-bloque">
+      <div class="contenedor">
+        <h2 class="centro" id="historia-titulo"></h2>
+        <p class="script centro historia-subtitulo" id="historia-subtitulo"></p>
+        <div id="historia-momentos"></div>
+      </div>
+    </section>
+
+    <section class="bloque centro contenedor fade-in">
       <h2>Dónde y cuándo</h2>
       <div class="lugares">
         <div class="lugar">
@@ -38,23 +47,25 @@
       </div>
     </section>
 
-    <section class="bloque centro" id="galeria-bloque">
-      <h2>Nuestra historia</h2>
+    <div class="parallax" id="parallax2"></div>
+
+    <section class="bloque centro contenedor fade-in" id="galeria-bloque">
+      <h2>Galería</h2>
       <div class="galeria" id="galeria"></div>
     </section>
 
-    <section class="bloque centro">
+    <section class="bloque centro contenedor fade-in">
       <h2>Código de vestimenta</h2>
       <p class="script" style="font-size:2.2rem;color:var(--tinta)" data-boda="dressCode"></p>
       <p class="suave" data-boda="dressCodeNota"></p>
     </section>
 
-    <section class="bloque centro">
+    <section class="bloque centro contenedor fade-in">
       <h2>Regalos</h2>
       <p data-boda="regalos"></p>
     </section>
 
-    <section class="bloque" id="confirmar">
+    <section class="bloque contenedor fade-in" id="confirmar">
       <h2 class="centro">Confirma tu asistencia</h2>
       <p class="centro suave">Por favor confírmanos antes del <b data-boda="fechaLimiteTexto"></b>.</p>
 
@@ -92,6 +103,10 @@
     <p class="script" style="font-size:1.8rem;color:var(--dorado)"><span data-boda="novio"></span> &amp; <span data-boda="novia"></span></p>
     <p data-boda="hashtag"></p>
   </footer>
+
+  <div class="lightbox-overlay" id="lightbox" onclick="cerrarLightbox()">
+    <img id="lightbox-img" alt="" onclick="event.stopPropagation()">
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>

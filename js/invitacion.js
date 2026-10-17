@@ -21,8 +21,11 @@ async function iniciar() {
   $("cantidad").value = familia.cupos_max;
 
   iniciarCuentaRegresiva();
-  $("foto-portada").src = DATOS_BODA.fotos.portada;
-  $("galeria").innerHTML = DATOS_BODA.fotos.galeria.map((f) => `<img src="${f}" alt="" loading="lazy">`).join("");
+  llenarParallax();
+  llenarHistoria();
+  llenarGaleria();
+  iniciarFadeIn();
+
   document.querySelectorAll("input[name=asiste]").forEach((r) => r.addEventListener("change", alternarCampos));
   $("cantidad").addEventListener("change", () => dibujarNombres());
   $("form-rsvp").addEventListener("submit", enviar);
@@ -35,13 +38,68 @@ async function iniciar() {
   }
 }
 
+function llenarParallax() {
+  $("parallax1").style.backgroundImage = `url('${DATOS_BODA.fotos.parallax}')`;
+  $("parallax2").style.backgroundImage = `url('${DATOS_BODA.fotos.parallax2}')`;
+}
+
+function llenarHistoria() {
+  const h = DATOS_BODA.historia;
+  $("historia-titulo").textContent = h.titulo;
+  $("historia-subtitulo").textContent = h.subtitulo;
+  $("historia-momentos").innerHTML = h.momentos.map((m) => `
+    <div class="momento fade-in">
+      <div class="momento-texto">
+        <h3>${m.titulo}</h3>
+        <p>${m.texto}</p>
+      </div>
+      <div class="momento-foto">
+        <img src="${m.foto}" alt="${m.titulo}" loading="lazy">
+      </div>
+    </div>
+  `).join("");
+}
+
+function llenarGaleria() {
+  $("galeria").innerHTML = DATOS_BODA.fotos.galeria
+    .map((f) => `<img src="${f}" alt="" loading="lazy" onclick="abrirLightbox(this.src)">`)
+    .join("");
+}
+
+function abrirLightbox(src) {
+  $("lightbox-img").src = src;
+  $("lightbox").classList.add("activo");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarLightbox() {
+  $("lightbox").classList.remove("activo");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") cerrarLightbox();
+});
+
+function iniciarFadeIn() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+}
+
 function alternarCampos() {
   const asiste = document.querySelector("input[name=asiste]:checked")?.value === "si";
   $("campos-si").classList.toggle("oculto", !asiste);
   if (asiste && !$("nombres").children.length) dibujarNombres();
 }
 
-// Dibuja un campo por asistente conservando lo ya escrito
 function dibujarNombres(valores) {
   const actuales = valores ?? [...$("nombres").querySelectorAll("input")].map((i) => i.value);
   const n = Number($("cantidad").value);
@@ -102,7 +160,7 @@ async function enviar(e) {
   }
   $("btn-enviar").textContent = "Actualizar confirmación";
   mostrarMensaje(asiste
-    ? "¡Gracias! Nos hace muy felices que nos acompañen. 🤍"
+    ? "¡Gracias! Nos hace muy felices que nos acompañen."
     : "Gracias por avisarnos. ¡Los extrañaremos!", "ok");
 }
 

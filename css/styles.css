@@ -102,7 +102,7 @@ textarea { min-height: 90px; resize: vertical; }
 }
 .barra button { background: none; border: none; color: var(--dorado); cursor: pointer; font: inherit; }
 
-.hero { text-align: center; padding: 48px 16px 64px; }
+.hero { text-align: center; padding: 48px 16px 64px; background: linear-gradient(to bottom, var(--marfil), rgba(251,248,242,.92)); }
 .hero .saludo { font-family: var(--serif); font-style: italic; font-size: 1.2rem; }
 .hero .nombres { font-size: clamp(3rem, 12vw, 5.5rem); color: var(--dorado); line-height: 1.1; margin: .2em 0; }
 .hero .fecha { letter-spacing: .3em; text-transform: uppercase; font-size: .85rem; }
@@ -149,7 +149,117 @@ th { font-weight: 700; font-size: .75rem; letter-spacing: .08em; text-transform:
   .rsvp { padding: 24px 16px; }
 }
 
-/* ---------- Fotos ---------- */
-.foto-portada { display: block; width: 100%; max-width: 760px; margin: 32px auto 0; border: 1px solid var(--dorado-claro); padding: 8px; background: var(--papel); }
-.galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 1.5em; }
-.galeria img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border: 1px solid var(--dorado-claro); padding: 6px; background: var(--papel); }
+/* ---------- Parallax ---------- */
+.parallax {
+  min-height: 55vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.parallax::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--marfil) 0%, transparent 15%, transparent 85%, var(--marfil) 100%);
+  pointer-events: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .parallax { background-attachment: scroll; }
+}
+@media (max-width: 768px) {
+  .parallax { background-attachment: scroll; min-height: 40vh; }
+}
+
+/* ---------- Historia ---------- */
+.bloque-historia { padding: 64px 0; background: var(--papel); }
+.historia-subtitulo { font-size: 1.8rem; color: var(--dorado); margin-bottom: 2.5em; }
+
+.momento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+.momento:last-child { margin-bottom: 0; }
+.momento:nth-child(even) .momento-foto { order: -1; }
+
+.momento-texto h3 { font-family: var(--serif); font-size: 1.5rem; color: var(--dorado); margin-bottom: .4em; }
+.momento-texto p { color: var(--tinta-suave); line-height: 1.8; }
+
+.momento-foto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(59, 53, 48, .12);
+}
+
+@media (max-width: 640px) {
+  .momento { grid-template-columns: 1fr; gap: 20px; }
+  .momento:nth-child(even) .momento-foto { order: 0; }
+}
+
+/* ---------- Galería ---------- */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 1.5em;
+}
+.galeria img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 0 4px 12px rgba(59, 53, 48, .08);
+}
+.galeria img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 28px rgba(59, 53, 48, .18);
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  cursor: pointer;
+  padding: 24px;
+}
+.lightbox-overlay.activo {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox-overlay img {
+  max-width: min(90vw, 700px);
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, .4);
+  position: relative;
+  z-index: 1001;
+}
+
+/* ---------- Fade-in animaciones ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
