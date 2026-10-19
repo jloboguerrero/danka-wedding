@@ -16,7 +16,9 @@
 
 body {
   margin: 0;
-  background: var(--marfil);
+  background-color: var(--marfil);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='8' height='8' fill='%23fbf8f2'/%3E%3Ccircle cx='2' cy='2' r='.6' fill='%23efe9db' /%3E%3Ccircle cx='6' cy='6' r='.6' fill='%23efe9db' /%3E%3Ccircle cx='6' cy='2' r='.4' fill='%23f0ead9' /%3E%3Ccircle cx='2' cy='6' r='.4' fill='%23f0ead9' /%3E%3Cline x1='0' y1='4' x2='8' y2='4' stroke='%23efe9db' stroke-width='.3'/%3E%3Cline x1='4' y1='0' x2='4' y2='8' stroke='%23f0ead9' stroke-width='.2'/%3E%3C/svg%3E");
+  background-size: 8px 8px;
   color: var(--tinta);
   font-family: var(--sans);
   font-size: 17px;
@@ -47,8 +49,7 @@ a { color: var(--dorado); }
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
   padding: 24px 16px;
   background:
-    radial-gradient(circle at top, rgba(176,141,87,.12), transparent 60%),
-    var(--marfil);
+    radial-gradient(circle at top, rgba(176,141,87,.12), transparent 60%);
 }
 .tarjeta {
   background: var(--papel);
@@ -102,7 +103,7 @@ textarea { min-height: 90px; resize: vertical; }
 }
 .barra button { background: none; border: none; color: var(--dorado); cursor: pointer; font: inherit; }
 
-.hero { text-align: center; padding: 48px 16px 64px; background: linear-gradient(to bottom, var(--marfil), rgba(251,248,242,.92)); }
+.hero { text-align: center; padding: 48px 16px 64px; }
 .hero .saludo { font-family: var(--serif); font-style: italic; font-size: 1.2rem; }
 .hero .nombres { font-size: clamp(3rem, 12vw, 5.5rem); color: var(--dorado); line-height: 1.1; margin: .2em 0; }
 .hero .fecha { letter-spacing: .3em; text-transform: uppercase; font-size: .85rem; }
@@ -124,6 +125,30 @@ section.bloque { padding: 56px 0; border-top: 1px solid var(--dorado-claro); }
 
 .rsvp { background: var(--papel); border: 1px solid var(--dorado-claro); padding: 32px 24px; }
 .nombres-asistentes input { margin-bottom: 8px; }
+
+/* ---------- Dress code ---------- */
+.dresscode-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 1em;
+}
+.dresscode-card {
+  border: 1px solid var(--dorado-claro); padding: 32px 20px; text-align: center;
+}
+.dresscode-card h3 { font-family: var(--script); font-size: 1.8rem; color: var(--dorado); margin-bottom: .3em; }
+.dresscode-item { font-family: var(--serif); font-size: 1.1rem; margin: 0 0 .3em; letter-spacing: .05em; text-transform: uppercase; }
+.dresscode-label { font-size: .85rem; margin: 0 0 .8em; }
+.dresscode-colores { display: flex; justify-content: center; gap: 10px; margin-bottom: 1em; }
+.color-circulo {
+  width: 28px; height: 28px; border-radius: 50%; display: inline-block;
+  position: relative;
+}
+.color-circulo::after {
+  content: ""; position: absolute; inset: -2px;
+  border: 2px solid var(--dorado-claro); border-radius: 50%;
+}
+.dresscode-detalle { font-size: .85rem; margin: 0; }
+@media (max-width: 520px) {
+  .dresscode-grid { grid-template-columns: 1fr; }
+}
 
 footer { text-align: center; padding: 48px 16px; color: var(--tinta-suave); font-size: .9rem; }
 
@@ -162,7 +187,7 @@ th { font-weight: 700; font-size: .75rem; letter-spacing: .08em; text-transform:
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, var(--marfil) 0%, transparent 15%, transparent 85%, var(--marfil) 100%);
+  background: linear-gradient(to bottom, rgba(251,248,242,.95) 0%, transparent 15%, transparent 85%, rgba(251,248,242,.95) 100%);
   pointer-events: none;
 }
 
@@ -174,7 +199,7 @@ th { font-weight: 700; font-size: .75rem; letter-spacing: .08em; text-transform:
 }
 
 /* ---------- Historia ---------- */
-.bloque-historia { padding: 64px 0; background: var(--papel); }
+.bloque-historia { padding: 64px 0; }
 .historia-subtitulo { font-size: 1.8rem; color: var(--dorado); margin-bottom: 2.5em; }
 
 .momento {

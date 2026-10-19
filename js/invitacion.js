@@ -41,6 +41,7 @@ async function iniciar() {
 function llenarParallax() {
   $("parallax1").style.backgroundImage = `url('${DATOS_BODA.fotos.parallax}')`;
   $("parallax2").style.backgroundImage = `url('${DATOS_BODA.fotos.parallax2}')`;
+  $("parallax3").style.backgroundImage = `url('${DATOS_BODA.fotos.parallax3}')`;
 }
 
 function llenarHistoria() {
