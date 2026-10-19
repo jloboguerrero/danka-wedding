@@ -17,10 +17,10 @@ const DATOS_BODA = {
   fechaLimiteTexto: "9 de diciembre de 2026",
   frase: "Con la bendición de Dios y de nuestras familias, queremos compartir contigo el día más especial de nuestras vidas.",
   lugar: {
-    nombre: "Quisquella",
+    nombre: "Quiskeya, carrera 48 #75 – 44 Diagonal a Casa del Rey.",
     direccion: "Barranquilla",
-    hora: "7:00 p. m.",
-    mapa: "https://maps.google.com/?q=Quisquella+Barranquilla",
+    hora: "6:30 p. m.",
+    mapa: "https://maps.app.goo.gl/WtSyeL84uuy1g9af6",
   },
   fotos: {
     portada: "img/fotos/foto03.jpeg",
