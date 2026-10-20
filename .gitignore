@@ -1,4 +1,14 @@
+# Secretos y datos personales
 .env
 scripts/.env
 scripts/invitados.csv
 scripts/credenciales.csv
+claves.sh
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
