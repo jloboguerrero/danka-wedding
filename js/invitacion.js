@@ -185,7 +185,7 @@ function iniciarCuentaRegresiva() {
       [Math.floor((d / 6e4) % 60), "min"],
       [Math.floor((d / 1e3) % 60), "seg"],
     ];
-    $("cuenta").innerHTML = partes.map(([v, t]) => `<div><b>${v}</b><span>${t}</span></div>`).join("");
+    $("cuenta").innerHTML = `<div class="cuenta-label">Faltan</div>` + partes.map(([v, t]) => `<div><b>${v}</b><span>${t}</span></div>`).join("");
   };
   pintar();
   setInterval(pintar, 1000);

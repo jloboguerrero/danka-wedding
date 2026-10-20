@@ -41,7 +41,7 @@ const DATOS_BODA = {
   },
   historia: {
     titulo: "Nuestra Historia",
-    subtitulo: "Todo inició...",
+    subtitulo: "Inicio...",
     momentos: [
       {
         titulo: "Todo comenzó en el colegio",
@@ -60,7 +60,7 @@ const DATOS_BODA = {
       },
       {
         titulo: "Coincidencias que nos acercaban",
-        texto: "En 2023 volvimos a compartir un espacio: el gimnasio. Entrenábamos juntos, pero no pasábamos de ser gym brothers. En febrero de 2024 se Johan enfermó y, por las circunstancias de aquel momento, fue Dankaly quien lo acompañó. 🙈 Aun así, nuestra historia todavía no estaba lista para retomarse.",
+        texto: "En 2023 volvimos a compartir un espacio: el gimnasio. Entrenábamos juntos, pero no pasábamos de ser gym brothers. En febrero de 2024 Johan enfermó y, por las circunstancias de aquel momento, fue Dankaly quien lo acompañó. 🙈 Aun así, nuestra historia todavía no estaba lista para retomarse.",
         foto: "img/historia/cap4.jpeg",
       },
       {
