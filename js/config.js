@@ -13,10 +13,10 @@ const DATOS_BODA = {
   // Fecha y hora de la ceremonia (hora local)
   fecha: "2027-01-09T19:00:00",
   fechaTexto: "Sábado, 9 de enero de 2027",
-  fechaLimiteRSVP: "2026-12-09T23:59:59",
-  fechaLimiteTexto: "9 de diciembre de 2026",
+  fechaLimiteRSVP: "2026-11-20T23:59:59",
+  fechaLimiteTexto: "20 de noviembre de 2026",
   fechaMostrarMesa: "2026-12-15T00:00:00",
-  contactoNovia: "+57 301 000 0000",
+  contactoNovia: "+57 301 3681023",
   frase: "Con la bendición de Dios y de nuestras familias, queremos compartir contigo el día más especial de nuestras vidas.",
   lugar: {
     nombre: "Quiskeya, carrera 48 #75 – 44 Diagonal a Casa del Rey.",
