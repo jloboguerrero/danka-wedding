@@ -2,6 +2,26 @@ let familia = null;
 
 const $ = (id) => document.getElementById(id);
 
+function textoReserva(tipos) {
+  const cuenta = { ADULTO: 0, NINO: 0, INFANTE: 0 };
+  tipos.forEach((t) => cuenta[t]++);
+  const partes = [];
+  if (cuenta.ADULTO) partes.push(`${cuenta.ADULTO} ${cuenta.ADULTO === 1 ? "adulto" : "adultos"}`);
+  if (cuenta.NINO) partes.push(`${cuenta.NINO} ${cuenta.NINO === 1 ? "niño" : "niños"}`);
+  if (cuenta.INFANTE) partes.push(`${cuenta.INFANTE} ${cuenta.INFANTE === 1 ? "infante" : "infantes"}`);
+  const texto = partes.length <= 1
+    ? partes[0] || "1 lugar"
+    : partes.slice(0, -1).join(", ") + " y " + partes.at(-1);
+  return `Hemos reservado ${texto} en su honor`;
+}
+
+function placeholderAsistente(tipos, index) {
+  const tipo = tipos[index] || "ADULTO";
+  const etiqueta = { ADULTO: "Adulto", NINO: "Niño", INFANTE: "Infante" };
+  const numTipo = tipos.slice(0, index + 1).filter((t) => t === tipo).length;
+  return `${etiqueta[tipo]} ${numTipo}`;
+}
+
 async function iniciar() {
   familia = await requerirFamilia();
   if (!familia) return;
@@ -10,9 +30,7 @@ async function iniciar() {
   const nombreCompleto = `${familia.nombre} ${familia.apellido}`;
   $("barra-familia").textContent = `Familia ${familia.apellido}`;
   $("saludo").textContent = `Querida familia ${familia.apellido}`;
-  $("cupos").textContent = familia.cupos_max === 1
-    ? "Hemos reservado 1 lugar en su honor"
-    : `Hemos reservado ${familia.cupos_max} lugares en su honor`;
+  $("cupos").textContent = textoReserva(familia.tipos_cupos);
   document.title = `Invitación · ${nombreCompleto}`;
 
   if (familia.mesa && new Date() >= new Date(DATOS_BODA.fechaMostrarMesa)) {
@@ -114,7 +132,7 @@ function dibujarNombres(valores) {
     const input = document.createElement("input");
     input.type = "text";
     input.required = true;
-    input.placeholder = `Asistente ${i + 1}`;
+    input.placeholder = placeholderAsistente(familia.tipos_cupos, i);
     input.value = actuales[i] ?? (i === 0 ? `${familia.nombre} ${familia.apellido}` : "");
     $("nombres").appendChild(input);
   }
