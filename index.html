@@ -11,20 +11,42 @@
 </head>
 <body>
   <main class="portada">
-    <div class="tarjeta">
-      <div class="fecha" data-boda="fechaTexto"></div>
-      <h1 class="nombres script"><span data-boda="novio"></span> &amp; <span data-boda="novia"></span></h1>
-      <div class="adorno">✦</div>
-      <p class="suave">Ingresa con el usuario y la clave que te enviamos por WhatsApp para ver tu invitación.</p>
+    <div class="carta-scene" id="carta-scene">
+      <div class="carta-flip" id="carta-flip">
 
-      <form id="form-login" autocomplete="on">
-        <label for="usuario">Usuario</label>
-        <input type="text" id="usuario" autocapitalize="none" autocomplete="username" required>
-        <label for="clave">Clave</label>
-        <input type="password" id="clave" autocomplete="current-password" required>
-        <button class="boton" type="submit">Ver invitación</button>
-        <div id="mensaje" class="mensaje" role="alert"></div>
-      </form>
+        <!-- FRENTE: sobre cerrado -->
+        <div class="carta-cara carta-frente">
+          <div class="sobre-estampilla">
+            <div class="estampilla-borde">
+              <span class="script" style="font-size:.9rem;color:var(--dorado)">J &amp; D</span>
+              <span style="font-size:.55rem;letter-spacing:.1em;color:var(--tinta-suave);margin-top:2px">2027</span>
+            </div>
+          </div>
+          <div class="sobre-matasellos">
+            <div class="matasellos-lineas"></div>
+          </div>
+          <p class="carta-familia serif" id="carta-familia">Familia</p>
+          <p class="carta-voltear suave">Toca para abrir</p>
+        </div>
+
+        <!-- REVERSO: formulario login -->
+        <div class="carta-cara carta-reverso">
+          <div class="fecha" data-boda="fechaTexto"></div>
+          <h1 class="nombres script"><span data-boda="novio"></span> &amp; <span data-boda="novia"></span></h1>
+          <div class="adorno">✦</div>
+          <p class="suave">Ingresa con el usuario y la clave que te enviamos por WhatsApp para ver tu invitación.</p>
+
+          <form id="form-login" autocomplete="on">
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" autocapitalize="none" autocomplete="username" required>
+            <label for="clave">Clave</label>
+            <input type="password" id="clave" autocomplete="current-password" required>
+            <button class="boton" type="submit">Abrir invitación</button>
+            <div id="mensaje" class="mensaje" role="alert"></div>
+          </form>
+        </div>
+
+      </div>
     </div>
   </main>
 
@@ -34,9 +56,15 @@
   <script>
     llenarTextos();
 
-    // Permite enlaces directos: index.html?u=usuario
     const params = new URLSearchParams(location.search);
     if (params.get("u")) document.getElementById("usuario").value = params.get("u");
+
+    // Voltear carta
+    const scene = document.getElementById("carta-scene");
+    const flip = document.getElementById("carta-flip");
+    document.querySelector(".carta-frente").addEventListener("click", () => {
+      flip.classList.add("volteada");
+    });
 
     async function redirigirSiHaySesion() {
       const { data: { session } } = await sb.auth.getSession();
@@ -58,11 +86,14 @@
           document.getElementById("usuario").value,
           document.getElementById("clave").value
         );
-        await redirigirSiHaySesion();
+        scene.classList.add("abierto");
+        setTimeout(() => {
+          scene.classList.add("salir");
+          setTimeout(() => redirigirSiHaySesion(), 800);
+        }, 1800);
       } catch (err) {
         msg.textContent = err.message;
         msg.classList.add("error");
-      } finally {
         boton.disabled = false;
       }
     });

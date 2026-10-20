@@ -6,8 +6,10 @@ create table public.familias (
   nombre      text not null,
   apellido    text not null,
   usuario     text not null unique,
-  cupos_max   int  not null default 1 check (cupos_max >= 0),
+  cupos_max   int  not null default 1 check (cupos_max >= 1),
   telefono    text,
+  parentesco  text,
+  mesa        text,
   es_admin    boolean not null default false,
   created_at  timestamptz not null default now()
 );

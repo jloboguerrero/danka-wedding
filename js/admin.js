@@ -9,6 +9,25 @@ function estado(f) {
 }
 const ETIQUETA = { si: "Asiste", no: "No asiste", pend: "Pendiente" };
 
+function mensajeWA(f) {
+  const url = `${location.origin}${location.pathname.replace(/[^/]*$/, "")}?u=${f.usuario}`;
+  return `¡Hola ${f.nombre}! 💍\n\nTe invitamos a nuestra boda, favor confírmanos respondiendo el formulario al final.\n\nIngresa aquí: ${url}\nUsuario: ${f.usuario}\nClave: godisgood\n\n¡Te esperamos!`;
+}
+
+function linkWA(f) {
+  if (!f.telefono) return "";
+  const tel = f.telefono.replace(/\D/g, "");
+  return `https://wa.me/${tel}?text=${encodeURIComponent(mensajeWA(f))}`;
+}
+
+async function copiarMensaje(f) {
+  try {
+    await navigator.clipboard.writeText(mensajeWA(f));
+    const btn = document.querySelector(`[data-copiar="${f.usuario}"]`);
+    if (btn) { btn.textContent = "✓"; setTimeout(() => btn.textContent = "Copiar", 1500); }
+  } catch (_) {}
+}
+
 async function iniciar() {
   const yo = await requerirFamilia();
   if (!yo) return;
@@ -66,9 +85,11 @@ function pintarTabla() {
   $("tabla").innerHTML = filtradas().map((f) => {
     const c = f.confirmaciones;
     const e = estado(f);
+    const wa = linkWA(f);
     return `<tr>
       <td>${esc(f.nombre)} ${esc(f.apellido)}</td>
       <td>${esc(f.usuario)}</td>
+      <td>${esc(f.parentesco)}</td>
       <td><span class="chip ${e}">${ETIQUETA[e]}</span></td>
       <td>${f.cupos_max}</td>
       <td>${c ? c.cantidad : "—"}</td>
@@ -76,17 +97,18 @@ function pintarTabla() {
       <td>${esc(c?.restricciones)}</td>
       <td>${esc(c?.mensaje)}</td>
       <td>${c ? new Date(c.updated_at).toLocaleDateString("es") : ""}</td>
+      <td class="acciones-col">${wa ? `<a href="${wa}" target="_blank" class="btn-wa" title="Enviar WhatsApp">WA</a>` : ""} <button type="button" class="btn-copiar" data-copiar="${esc(f.usuario)}" onclick="copiarMensaje(filas.find(x=>x.usuario==='${esc(f.usuario)}'))">Copiar</button></td>
     </tr>`;
-  }).join("") || `<tr><td colspan="9" class="centro suave">Sin resultados</td></tr>`;
+  }).join("") || `<tr><td colspan="11" class="centro suave">Sin resultados</td></tr>`;
 }
 
 function exportarCSV() {
   const celda = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-  const encabezado = ["Nombre", "Apellido", "Usuario", "Teléfono", "Estado", "Cupos", "Asisten", "Nombres", "Restricciones", "Mensaje", "Actualizado"];
+  const encabezado = ["Nombre", "Apellido", "Usuario", "Teléfono", "Parentesco", "Estado", "Cupos", "Asisten", "Nombres", "Restricciones", "Mensaje", "Actualizado"];
   const lineas = filas.map((f) => {
     const c = f.confirmaciones;
     return [
-      f.nombre, f.apellido, f.usuario, f.telefono, ETIQUETA[estado(f)], f.cupos_max,
+      f.nombre, f.apellido, f.usuario, f.telefono, f.parentesco, ETIQUETA[estado(f)], f.cupos_max,
       c?.cantidad ?? "", (c?.nombres_asistentes ?? []).join("; "), c?.restricciones, c?.mensaje,
       c ? new Date(c.updated_at).toLocaleString("es") : "",
     ].map(celda).join(",");

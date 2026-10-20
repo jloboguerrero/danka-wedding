@@ -15,6 +15,11 @@ async function iniciar() {
     : `Hemos reservado ${familia.cupos_max} lugares en su honor`;
   document.title = `Invitación · ${nombreCompleto}`;
 
+  if (familia.mesa && new Date() >= new Date(DATOS_BODA.fechaMostrarMesa)) {
+    $("info-mesa").textContent = `Tu mesa asignada: ${familia.mesa}`;
+    $("info-mesa").classList.remove("oculto");
+  }
+
   $("cantidad").innerHTML = Array.from({ length: familia.cupos_max }, (_, i) =>
     `<option value="${i + 1}">${i + 1} ${i === 0 ? "persona" : "personas"}</option>`
   ).join("");
@@ -34,7 +39,7 @@ async function iniciar() {
 
   if (new Date() > new Date(DATOS_BODA.fechaLimiteRSVP)) {
     $("form-rsvp").querySelectorAll("input, select, textarea, button").forEach((el) => (el.disabled = true));
-    mostrarMensaje("La fecha límite para confirmar ya pasó. Si necesitas un cambio, escríbenos directamente.", "error");
+    mostrarMensaje(`La fecha límite para confirmar ya pasó. Si necesitas un cambio, comunícate con nosotros al ${DATOS_BODA.contactoNovia}.`, "error");
   }
 }
 

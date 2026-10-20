@@ -52,13 +52,13 @@ function mensajeWhatsApp({ nombre, apellido, usuario, clave, cupos }) {
   return [
     `¡Hola ${nombre}! 💍`,
     ``,
-    `Con mucha alegría te invitamos a nuestra boda. Preparamos una invitación especial para la familia ${apellido} (${cupos} ${cupos === 1 ? "cupo" : "cupos"}).`,
+    `Te invitamos a nuestra boda, favor confírmanos respondiendo el formulario al final.`,
     ``,
     `Ingresa aquí: ${url}`,
     `Usuario: ${usuario}`,
     `Clave: ${clave}`,
     ``,
-    `Por favor confirma tu asistencia en la página. ¡Te esperamos!`,
+    `¡Te esperamos!`,
   ].join("\n");
 }
 
@@ -80,6 +80,8 @@ for (const inv of invitados) {
   const apellido = inv.apellido;
   const cupos = Number(inv.cupos || 1);
   const telefono = (inv.telefono || "").replace(/\D/g, "");
+  const parentesco = inv.parentesco || null;
+  const mesa = inv.mesa || null;
   const esAdmin = ["si", "sí", "true", "1"].includes((inv.es_admin || "").toLowerCase());
   if (!nombre || !apellido) continue;
   if (personas.has(clavePersona(nombre, apellido))) {
@@ -103,7 +105,7 @@ for (const inv of invitados) {
       await api("/rest/v1/familias", {
         method: "POST",
         headers: { Prefer: "return=minimal" },
-        body: JSON.stringify({ user_id: user.id, nombre, apellido, usuario, cupos_max: cupos, telefono, es_admin: esAdmin }),
+        body: JSON.stringify({ user_id: user.id, nombre, apellido, usuario, cupos_max: cupos, telefono, parentesco, mesa, es_admin: esAdmin }),
       });
     } catch (err) {
       await api(`/auth/v1/admin/users/${user.id}`, { method: "DELETE" });
