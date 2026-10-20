@@ -9,7 +9,7 @@ async function iniciar() {
   llenarTextos();
   const nombreCompleto = `${familia.nombre} ${familia.apellido}`;
   $("barra-familia").textContent = `Familia ${familia.apellido}`;
-  $("saludo").textContent = `Querida familia de ${nombreCompleto}`;
+  $("saludo").textContent = `Querida familia ${familia.apellido}`;
   $("cupos").textContent = familia.cupos_max === 1
     ? "Hemos reservado 1 lugar en su honor"
     : `Hemos reservado ${familia.cupos_max} lugares en su honor`;

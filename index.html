@@ -57,7 +57,13 @@
     llenarTextos();
 
     const params = new URLSearchParams(location.search);
-    if (params.get("u")) document.getElementById("usuario").value = params.get("u");
+    const paramU = params.get("u");
+    if (paramU) {
+      document.getElementById("usuario").value = paramU;
+      sb.rpc("apellido_por_usuario", { p_usuario: paramU }).then(({ data }) => {
+        if (data) document.getElementById("carta-familia").textContent = "Familia " + data;
+      });
+    }
 
     // Voltear carta
     const scene = document.getElementById("carta-scene");

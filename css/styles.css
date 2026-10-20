@@ -246,6 +246,13 @@ section.bloque { padding: 56px 0; border-top: 1px solid var(--dorado-claro); }
   border: 2px solid var(--dorado-claro); border-radius: 50%;
 }
 .dresscode-detalle { font-size: .85rem; margin: 0; }
+
+/* ---------- Carta regalos ---------- */
+.carta-regalos {
+  display: block; margin: 1.5em auto 0; max-width: 480px; width: 100%;
+  height: auto; border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(59, 53, 48, .12);
+}
 @media (max-width: 520px) {
   .dresscode-grid { grid-template-columns: 1fr; }
 }

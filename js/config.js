@@ -41,7 +41,7 @@ const DATOS_BODA = {
   },
   historia: {
     titulo: "Nuestra Historia",
-    subtitulo: "Todo comenzó en el colegio",
+    subtitulo: "Todo inició...",
     momentos: [
       {
         titulo: "Todo comenzó en el colegio",
