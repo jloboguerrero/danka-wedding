@@ -150,7 +150,7 @@ async function cargarConfirmacion() {
   $("mensaje-novios").value = data.mensaje ?? "";
   if (data.asiste) {
     $("cantidad").value = data.cantidad;
-    $("restricciones").value = data.restricciones ?? "";
+    if ($("restricciones")) $("restricciones").value = data.restricciones ?? "";
     dibujarNombres(data.nombres_asistentes);
   }
   alternarCampos();
@@ -173,7 +173,7 @@ async function enviar(e) {
     asiste,
     cantidad: asiste ? nombres.length : 0,
     nombres_asistentes: nombres,
-    restricciones: asiste ? $("restricciones").value.trim() || null : null,
+    restricciones: asiste ? ($("restricciones")?.value.trim() || null) : null,
     mensaje: $("mensaje-novios").value.trim() || null,
   });
   $("btn-enviar").disabled = false;
