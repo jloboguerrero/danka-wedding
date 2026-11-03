@@ -22,7 +22,7 @@ const DATOS_BODA = {
     nombre: "Calle 82# 58 41 Hotel American Golf",
     direccion: "Barranquilla",
     hora: "7:00 p. m.",
-    mapa: "https://maps.app.goo.gl/WtSyeL84uuy1g9af6",
+    mapa: "https://maps.app.goo.gl/mwna5J8TczQ4EDch9",
   },
   fotos: {
     portada: "img/fotos/foto03.jpeg",
